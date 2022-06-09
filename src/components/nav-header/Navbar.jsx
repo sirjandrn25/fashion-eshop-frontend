@@ -1,10 +1,14 @@
 import React from 'react'
 import Button from '../UI/Button'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '../../redux/cart/reducer'
+
+const totalQtyReducer = (prevState, currState) => prevState + currState.qty
 
 const Navbar = () => {
   const { toggleOpen } = cartActions
+  const carts = useSelector((state) => state.cart.data)
+
   const dispatch = useDispatch()
   // console.log(toggleOpen)
 
@@ -18,7 +22,9 @@ const Navbar = () => {
           onClick={(e) => dispatch(toggleOpen())}
           className='bg-black/40 border-2 flex items-center border-cyan-400 hover:bg-blue-400'>
           <span className='text-xl font-bold mr-2'>Cart</span>
-          <span className='text-white  font-medium bg-blue-500 px-2 rounded-full'>4</span>
+          <span className='text-white  font-medium bg-blue-500 px-2 rounded-full'>
+            {carts.reduce(totalQtyReducer, 0)}
+          </span>
         </Button>
       </div>
     </nav>

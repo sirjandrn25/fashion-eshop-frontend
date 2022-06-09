@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart)
   // const [open, setOpen] = React.useState(true)
-  const { toggleOpen } = cartActions
+  const { toggleOpen, incrementCart, decrementCart, removeCart } = cartActions
   const dispatch = useDispatch()
 
   const closeHandler = () => {
@@ -15,14 +15,32 @@ const CartContainer = () => {
     // setOpen(!open)
   }
 
+  const incrementHandler = (cart) => {
+    dispatch(incrementCart(cart))
+  }
+  const decrementHandler = (cart) => {
+    dispatch(decrementCart(cart))
+  }
+
+  const removeCartHandler = (cart_id) => {
+    dispatch(removeCart(cart_id))
+  }
+
   return (
     <Modal onClose={closeHandler} open={cart.open}>
-      <div className='w-[1200px] h-[500px]'>
+      <div className='w-[900px] h-[500px]'>
         <ul className='w-full'>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cart.data.map((cart) => {
+            return (
+              <CartItem
+                onRemove={removeCartHandler}
+                onIncrement={incrementHandler}
+                onDecrement={decrementHandler}
+                cart={cart}
+                key={cart.id}
+              />
+            )
+          })}
         </ul>
       </div>
     </Modal>

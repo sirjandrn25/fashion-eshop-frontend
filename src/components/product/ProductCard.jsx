@@ -13,7 +13,9 @@ const ProductCard = (props) => {
       </div>
       <span className='my-2 text-lg font-semibold text-gray-600'>{props.product.title}</span>
       <div className='mt-1 flex flex-row items-center '>
-        <Button className='border-2 border-sky-400 hover:bg-sky-500 hover:text-white text-gray-700 mr-3 text-sm'>
+        <Button
+          onClick={(e) => props.addNewCart(props.product)}
+          className='border-2 border-sky-400 hover:bg-sky-500 hover:text-white text-gray-700 mr-3 text-sm'>
           Add to Cart
         </Button>
         <span className='text-xl font-sans text-purple-700 font-bold'>${props.product.price}</span>
