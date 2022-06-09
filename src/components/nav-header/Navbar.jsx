@@ -1,11 +1,11 @@
 import React from 'react'
 import Button from '../UI/Button'
-// import { useSelector, useDispatch } from 'react-redux'
-// import { cartActions } from '../../redux/reducers/carts'
+import { useDispatch } from 'react-redux'
+import { cartActions } from '../../redux/cart/reducer'
 
 const Navbar = () => {
-  // const { toggleOpen } = cartActions
-  // const dispatch = useDispatch()
+  const { toggleOpen } = cartActions
+  const dispatch = useDispatch()
   // console.log(toggleOpen)
 
   return (
@@ -15,7 +15,7 @@ const Navbar = () => {
       </div>
       <div>
         <Button
-          // onClick={(e) => dispatch(toggleOpen())}
+          onClick={(e) => dispatch(toggleOpen())}
           className='bg-black/40 border-2 flex items-center border-cyan-400 hover:bg-blue-400'>
           <span className='text-xl font-bold mr-2'>Cart</span>
           <span className='text-white  font-medium bg-blue-500 px-2 rounded-full'>4</span>
