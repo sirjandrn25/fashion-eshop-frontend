@@ -31,7 +31,7 @@ const StatusNotification = () => {
   }
 
   return (
-    <div className='w-full px-7 py-3 fixed bottom-0 left-0 right-0 transition-all duration-700 ease-in-out delay-900  z-50'>
+    <div className='w-screen px-7 py-3 fixed bottom-0 left-0 right-0 transition-all duration-700 ease-in-out delay-900  z-50'>
       <div className={show_status_class}>
         <div className='flex flex-col '>
           <span className='text-white font-medium text-lg capitalize'>{httpStatusState.title}</span>

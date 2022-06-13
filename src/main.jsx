@@ -4,11 +4,43 @@ import App from './App'
 import './index.css'
 import { Provider } from 'react-redux'
 import store from './store'
+import HomePage from './pages'
+import ProductPage from './pages/product'
+import CartPage from './pages/cart'
+import AuthPage from './pages/auth'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ContextProvider from './context'
+import AuthProtected from './components/auth/AuthProtected'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    {/* <Provider store={store}> */}
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <Provider store={store}>
+                <App />
+              </Provider>
+            }>
+            <Route index element={<HomePage />} />
+            <Route path='/products' element={<ProductPage />} />
+            <Route
+              path='carts'
+              element={
+                <AuthProtected>
+                  <CartPage />
+                </AuthProtected>
+              }
+            />
+            <Route path='auth' element={<AuthPage />} />
+          </Route>
+          <Route path='*' element={<h1>404 page not found</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
+    {/* </Provider> */}
   </React.StrictMode>
 )

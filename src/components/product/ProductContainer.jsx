@@ -39,7 +39,7 @@ const ProductContainer = () => {
   }
 
   return (
-    <div className='w-[1100px] absolute top-[150px] grid grid-cols-4 gap-2 mt-10 '>
+    <div className=' w-[1100px] grid grid-cols-4 gap-2 mt-10 '>
       {products.map((product) => {
         return <ProductCard product={product} addNewCart={addNewProductInCart} key={product.id} />
       })}
