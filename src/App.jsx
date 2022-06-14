@@ -6,7 +6,7 @@ import StatusNotification from './components/UI/StatusNotification'
 import Layout from './components/base/Layout'
 import { fetchAsyncCarts } from './redux/cart/asynActions'
 import { useDispatch } from 'react-redux'
-
+import ContextProvider from './context'
 import { Outlet } from 'react-router-dom'
 
 const App = () => {
@@ -18,20 +18,11 @@ const App = () => {
     return () => {}
   }, [])
   return (
-    <>
+    <ContextProvider>
       <Layout>
         <Outlet />
       </Layout>
-      {/* <CartContainer /> */}
-    </>
-
-    // <div className='h-full relative w-screen flex flex-col justify-center items-center bg-gray-200'>
-
-    //   <Navbar />
-    //   <ProductContainer />
-    //   <CartContainer />
-    //   <StatusNotification />
-    // </div>
+    </ContextProvider>
   )
 }
 

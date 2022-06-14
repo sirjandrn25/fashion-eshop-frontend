@@ -60,7 +60,7 @@ const Navbar = () => {
                 </Button>
               </li>
               <li className='mx-2'>
-                <NavLink to='/' className={'text-white text-lg font-medium'}>
+                <NavLink to='/account' className={'text-white text-lg font-medium'}>
                   Account
                 </NavLink>
               </li>

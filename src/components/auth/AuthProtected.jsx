@@ -1,27 +1,22 @@
 import { useEffect } from 'react'
 import UseAuthContext from '../../context/auth-context'
-import { useNavigate, Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 const AuthProtected = ({ children }) => {
   const { isLoggedIn } = UseAuthContext()
+  const location = useLocation()
+  console.log(location)
+  // useEffect(() => {}, [])
 
-  useEffect(() => {
-    console.log(isLoggedIn)
-    if (!isLoggedIn) {
-      return <Navigate to='/auth' replace={true} />
-    }
-    return () => {}
-  }, [isLoggedIn])
-  //   const navigate = useNavigate()
-
+  // useEffect(() => {
   //   console.log(isLoggedIn)
-  //   useEffect(() => {
-  //     if (!isLoggedIn) {
-  //       navigate('/auth', { replace: true })
-  //       return
-  //     }
-  //     return () => {}
-  //   }, [])
+  //   if (!isLoggedIn) {
+  //     return <Navigate to='/auth' replace={true} />
+  //   }
+  //   return () => {}
+  // }, [isLoggedIn])
+  if (!isLoggedIn) return <Navigate to='/auth' state={{ pathname: location.pathname }} />
+
   return children
   //   navigate('/auth', { replace: true })
 }

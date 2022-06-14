@@ -4,17 +4,20 @@ import InputField from '../UI/InputField'
 import Button from '../UI/Button'
 import UseAuthContext from '../../context/auth-context'
 import useHttp from '../../hooks/useHttp'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Navigate, useLocation } from 'react-router-dom'
 
 const Login = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const { isLoggedIn, login } = UseAuthContext()
   const { status, error, sendingHttpRequest } = useHttp()
-  const navigate = useNavigate()
-  //   console.log(isLoggedIn)
+
+  const location = useLocation()
+  console.log(location)
+  // console.log(isLoggedIn)
   if (isLoggedIn) {
-    navigate('/', { replace: true })
+    return <Navigate to={location.state ? location.state.pathname : '/'} replace={true} />
+    // return navigate('/', { replace: true })
   }
 
   const emailChangeHandler = (e) => {
@@ -28,7 +31,7 @@ const Login = () => {
     e.preventDefault()
     const config = {
       method: 'post',
-      url: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+      url: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAKuP5sIym6HDWq84xKcf9FVNdhMvEWwek',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -39,8 +42,10 @@ const Login = () => {
     }
 
     const response = await sendingHttpRequest(config)
+    const expireTime = new Date().getTime() + 3600 * 1000
+
     if (response) {
-      login(response.idToken)
+      login(response.idToken, expireTime)
     }
   }
 
