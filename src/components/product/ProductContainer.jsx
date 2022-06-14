@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { cartActions } from '../../redux/cart/reducer'
 import { fetchProducts } from '../../redux/product/asynActions'
 import { addAsyncCart, updateAsyncCart } from '../../redux/cart/asynActions'
+import ProductSearch from './ProductSearch'
 
 const ProductContainer = () => {
   // const { getProducts } = productActions
@@ -39,10 +40,13 @@ const ProductContainer = () => {
   }
 
   return (
-    <div className=' w-[1100px] grid grid-cols-4 gap-2 mt-10 '>
-      {products.map((product) => {
-        return <ProductCard product={product} addNewCart={addNewProductInCart} key={product.id} />
-      })}
+    <div className='col-span-3 flex flex-col'>
+      <ProductSearch />
+      <div className='w-full grid grid-cols-3 gap-2 '>
+        {products.map((product) => {
+          return <ProductCard product={product} addNewCart={addNewProductInCart} key={product.id} />
+        })}
+      </div>
     </div>
   )
 }

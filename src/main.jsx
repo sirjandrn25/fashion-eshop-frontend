@@ -12,6 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import AuthProtected from './components/auth/AuthProtected'
 import AccountPage from './pages/account'
+import ProductDetail from './pages/ProductDetail'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           }>
           <Route index element={<HomePage />} />
           <Route path='/products' element={<ProductPage />} />
+          <Route path='/products/:id' element={<ProductDetail />} />
           <Route
             path='carts'
             element={
